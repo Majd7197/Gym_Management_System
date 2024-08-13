@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GymGate - Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: white;
+            margin: 0;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8;
+        }
+
+        .profile-button {
+            background: rgb(99, 39, 120);
+            box-shadow: none;
+            border: none;
+        }
+
+        .profile-button:hover,
+        .profile-button:focus,
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none;
+        }
+
+        .back:hover {
+            color: #682773;
+            cursor: pointer;
+        }
+
+        .labels {
+            font-size: 11px;
+        }
+
+        .add-experience:hover {
+            background: #BA68C8;
+            color: #fff;
+            cursor: pointer;
+            border: solid 1px #BA68C8;
+        }
+
+        header {
+            background-color: #4b2e83;
+            padding: 10px;
+            color: white;
+        }
+
+        header .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #4b2e83;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">GymGate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users">Add User</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/classes">Classes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subscriptions">Subscriptions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/trainers/view">Trainers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/members/view">Members</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    {% if request.session.username == "admin" %}
+                    <li class="nav-item"><a class="nav-link" href="logout"><i class="fas fa-sign-out-alt"></i>
+                            Logout</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="/aboutus">About us</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container rounded  mt-5 mb-5 shadow-lg p-3 mb-5 bg-blue rounded">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <form method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Class Settings</h4>
+                        </div>
+                        <div class="row mt-3">
+
+
+                            <div class="col-md-12">
+                                <label class="labels">Title</label>
+                                <input type="text" class="form-control" name="title" value="{{ class.title }}">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Trainer</label>
+                                <input type="text" class="form-control" name="trainer" value="">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Max Size</label>
+                                <input type="text" class="form-control" name="max_size" value="{{ class.max_size }}">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Description</label>
+                                <textarea class="form-control"
+                                    name="description">{{ class.description }}</textarea>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center experience">
+                        <span>Edit Details</span>
+                    </div>
+                    <br>
+                    <div class="col-md-12">
+                        <label class="labels">Specialties</label>
+                        <ul>
+                            {% for specialty in user.specialties.all %}
+                            <li>{{ specialty.title }}: {{ specialty.description }}</li>
+                            {% empty %}
+                            <li>No specialties listed.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <br>
+                    <div class="col-md-12">
+                        <label class="labels">Subscriptions</label>
+                        <ul>
+                            {% for subscription in user.subscriptions.all %}
+                            <li>Start Date: {{ subscription.start_date }} - End Date: {{ subscription.end_date }}</li>
+                            {% empty %}
+                            <li>No subscriptions listed.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <br>
+                    <div class="col-md-12">
+                        <label class="labels">Roles</label>
+                        <ul>
+                            {% for role in user.roles.all %}
+                            <li>{{ role.title }}: {{ role.description }}</li>
+                            {% empty %}
+                            <li>No roles listed.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 GymGate. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

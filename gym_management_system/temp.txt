@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GymGate - Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px 0;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8;
+        }
+
+        .profile-button {
+            background: rgb(99, 39, 120);
+            box-shadow: none;
+            border: none;
+        }
+
+        .profile-button:hover,
+        .profile-button:focus,
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none;
+        }
+
+        header {
+            background-color: #4b2e83;
+            padding: 10px;
+            color: white;
+        }
+
+        header .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #4b2e83;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            z-index: 2;
+            width: 5%;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: #000;
+            background-size: 50%;
+            border-radius: 50%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">GymGate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users">Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/classes">Classes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subscriptions">Subscriptions</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/trainers/view">Trainers</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="/members/view">Members</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user"></i> Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 GymGate. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $('#toggleClasses').on('click', function () {
+                var classList = $('#class-list');
+                if (classList.is(':visible')) {
+                    classList.slideUp(1000); // Slide up over 1 second
+                    $(this).text('Add a Class');
+                } else {
+                    classList.slideDown(1000); // Slide down over 1 second
+                    $(this).text('Hide Form');
+                }
+            });
+
+            $('#toggleMembers').on('click', function () {
+                var memberList = $('#member-list');
+                if (memberList.is(':visible')) {
+                    memberList.slideUp(1000); // Slide up over 1 second
+                    $(this).text('Add a Member to a Class');
+                } else {
+                    memberList.slideDown(1000); // Slide down over 1 second
+                    $(this).text('Hide Form');
+                }
+            });
+        });
+        
+    </script>
+
+</body>
+
+</html>

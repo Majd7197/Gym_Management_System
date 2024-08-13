@@ -1,0 +1,45 @@
+body{
+    padding:15px 25px;
+}
+.top_container{
+    display:flex;
+    justify-content: space-between;
+}
+
+
+
+#main_container{
+    padding: 20px 0;
+        display:flex;
+        justify-content: space-around;
+    }
+    
+    
+    .left_container, .right_container {
+        width: 40%;
+    }
+    .button{
+        box-shadow: 3px 3px 3px black;
+        font-size: 20px;
+        font-weight: 400;
+        background-color: #009e0f;
+        align-self: end;
+        justify-self: center;
+        color:white;
+        cursor: pointer;
+        margin-bottom: 20px;
+    
+    }
+    .labell{
+        display: flex;
+        
+        align-items: center;
+    }
+.view_pie_container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin:0 30%;
+    border: solid black;
+}

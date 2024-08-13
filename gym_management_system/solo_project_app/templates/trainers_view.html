@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GymGate - Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <!-- <link rel="stylesheet" href="{% static 'css/style_index.css' %}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <style>
+              html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: white;
+            margin: 0;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8;
+        }
+
+        .profile-button {
+            background: rgb(99, 39, 120);
+            box-shadow: none;
+            border: none;
+        }
+
+        .profile-button:hover,
+        .profile-button:focus,
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none;
+        }
+
+        .back:hover {
+            color: #682773;
+            cursor: pointer;
+        }
+
+        .labels {
+            font-size: 11px;
+        }
+
+        .add-experience:hover {
+            background: #BA68C8;
+            color: #fff;
+            cursor: pointer;
+            border: solid 1px #BA68C8;
+        }
+
+        header {
+            background-color: #4b2e83;
+            padding: 10px;
+            color: white;
+        }
+
+        header .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #4b2e83;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .single_advisor_profile {
+            position: relative;
+            margin-bottom: 50px;
+            transition: all 0.5s;
+            z-index: 1;
+            border-radius: 15px;
+            box-shadow: 0 0.25rem 1rem rgba(47, 91, 234, 0.125);
+        }
+
+        .single_advisor_profile .advisor_thumb {
+            position: relative;
+            z-index: 1;
+            border-radius: 15px 15px 0 0;
+            margin: 0 auto;
+            padding: 30px 30px 0 30px;
+            background-color: #3f43fd;
+            overflow: hidden;
+        }
+
+        .single_advisor_profile .advisor_thumb::after {
+            transition: all 0.5s;
+            position: absolute;
+            width: 150%;
+            height: 80px;
+            bottom: -45px;
+            left: -25%;
+            content: "";
+            background-color: #ffffff;
+            transform: rotate(-15deg);
+        }
+
+        @media only screen and (max-width: 575px) {
+            .single_advisor_profile .advisor_thumb::after {
+                height: 160px;
+                bottom: -90px;
+            }
+        }
+
+        .single_advisor_profile .advisor_thumb .social-info {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            bottom: 0;
+            right: 30px;
+            text-align: right;
+        }
+
+        .single_advisor_profile .advisor_thumb .social-info a {
+            font-size: 14px;
+            color: #020710;
+            padding: 0 5px;
+        }
+
+        .single_advisor_profile .advisor_thumb .social-info a:hover,
+        .single_advisor_profile .advisor_thumb .social-info a:focus {
+            color: #3f43fd;
+        }
+
+        .single_advisor_profile .advisor_thumb .social-info a:last-child {
+            padding-right: 0;
+        }
+
+        .single_advisor_profile .single_advisor_details_info {
+            position: relative;
+            z-index: 1;
+            padding: 30px;
+            text-align: right;
+            transition: all 0.5s;
+            border-radius: 0 0 15px 15px;
+            background-color: #ffffff;
+        }
+
+        .single_advisor_profile .single_advisor_details_info::after {
+            transition: all 0.5s;
+            position: absolute;
+            z-index: 1;
+            width: 50px;
+            height: 3px;
+            background-color: #3f43fd;
+            content: "";
+            top: 12px;
+            right: 30px;
+        }
+
+        .single_advisor_profile .single_advisor_details_info h6 {
+            margin-bottom: 0.25rem;
+            transition: all 0.5s;
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .single_advisor_profile .single_advisor_details_info h6 {
+                font-size: 14px;
+            }
+        }
+
+        .single_advisor_profile .single_advisor_details_info p {
+            transition: all 0.5s;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .single_advisor_profile .single_advisor_details_info p {
+                font-size: 12px;
+            }
+        }
+
+        .single_advisor_profile:hover .advisor_thumb::after,
+        .single_advisor_profile:focus .advisor_thumb::after {
+            background-color: #070a57;
+        }
+
+        .single_advisor_profile:hover .advisor_thumb .social-info a,
+        .single_advisor_profile:focus .advisor_thumb .social-info a {
+            color: #ffffff;
+        }
+
+        .single_advisor_profile:hover .advisor_thumb .social-info a:hover,
+        .single_advisor_profile:hover .advisor_thumb .social-info a:focus,
+        .single_advisor_profile:focus .advisor_thumb .social-info a:hover,
+        .single_advisor_profile:focus .advisor_thumb .social-info a:focus {
+            color: #ffffff;
+        }
+
+        .single_advisor_profile:hover .single_advisor_details_info,
+        .single_advisor_profile:focus .single_advisor_details_info {
+            background-color: #070a57;
+        }
+
+        .single_advisor_profile:hover .single_advisor_details_info::after,
+        .single_advisor_profile:focus .single_advisor_details_info::after {
+            background-color: #ffffff;
+        }
+
+        .single_advisor_profile:hover .single_advisor_details_info h6,
+        .single_advisor_profile:focus .single_advisor_details_info h6 {
+            color: #ffffff;
+        }
+
+        .single_advisor_profile:hover .single_advisor_details_info p,
+        .single_advisor_profile:focus .single_advisor_details_info p {
+            color: #ffffff;
+        }
+
+        .photo_size {
+            width: 280px;
+            height: 280px;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            z-index: 2;
+            width: 5%;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: #000;
+            /* Change to your desired color */
+            background-size: 50%;
+            /* Adjust the size of the icon if needed */
+            border-radius: 50%;
+            /* Optional: Make the icon round */
+            padding: 10px;
+            /* Optional: Add some padding around the icon */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">GymGate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users">Add User</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/classes">Classes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subscriptions">Subscriptions</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/trainers/view">Trainers</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="/members/view">Members</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    {% if request.session.username == "admin" %}
+                    <li class="nav-item"><a class="nav-link" href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="/aboutus">About us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-8 col-lg-6">
+                    <!-- Section Heading-->
+                    <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s"
+                        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <br>
+                        <h3>Our Creative <span> Team</span></h3>
+                        <br>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Trainer Carousel -->
+            <div id="trainerCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for trainer in trainers %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="row justify-content-center">
+                            {% endif %}
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s"
+                                    style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                    <!-- Team Thumb-->
+                                    <div class="advisor_thumb">
+                                        <img class="photo_size"
+                                            src="{% if trainer.photo %}{{ trainer.photo.url }}{% else %}{{ MEDIA_URL }}profile_pics/default.png{% endif %}"
+                                            alt="Trainer Photo">
+                                        <!-- Social Info-->
+                                        <div class="social-info">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- Team Details-->
+                                    <div class="single_advisor_details_info">
+                                        <h6>{{trainer.first_name}} {{trainer.last_name}}</h6>
+                                        <p class="designation">
+                                            {% for specialty in trainer.specialties.all %}
+                                            {{ specialty.title }}{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                        <p><a href="/user/{{trainer.id}}/profile">Edit Profile</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 or forloop.last %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- Carousel controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#trainerCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#trainerCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 GymGate. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

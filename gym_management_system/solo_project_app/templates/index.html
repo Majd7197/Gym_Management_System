@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GymGate - Add User</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: white;
+            margin: 0;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8;
+        }
+
+        .profile-button {
+            background: rgb(99, 39, 120);
+            box-shadow: none;
+            border: none;
+        }
+
+        .profile-button:hover,
+        .profile-button:focus,
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none;
+        }
+
+        .back:hover {
+            color: #682773;
+            cursor: pointer;
+        }
+
+        .labels {
+            font-size: 11px;
+        }
+
+        .add-experience:hover {
+            background: #BA68C8;
+            color: #fff;
+            cursor: pointer;
+            border: solid 1px #BA68C8;
+        }
+
+        header {
+            background-color: #4b2e83;
+            padding: 10px;
+            color: white;
+        }
+
+        header .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #4b2e83;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            /* Removed position: fixed */
+        }
+
+        .container-rounded {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+    </style>
+    <script>
+        function toggleCustomRoleInput() {
+            const roleSelect = document.getElementById('role');
+            const customRoleContainer = document.getElementById('custom-role-container');
+            const customDescriptionContainer = document.getElementById('custom-description-container');
+
+            if (roleSelect.value === 'custom') {
+                customRoleContainer.style.display = 'block';
+                customDescriptionContainer.style.display = 'block';
+            } else {
+                customRoleContainer.style.display = 'none';
+                customDescriptionContainer.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">GymGate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/users">Add User</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/classes">Classes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subscriptions">Subscriptions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/trainers/view">Trainers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/members/view">Members</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    {% if request.session.username == "admin" %}
+                    <li class="nav-item"><a class="nav-link" href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="/aboutus">About us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container container-rounded mt-5 mb-5 content">
+        <h2 class="mb-4">Add a User</h2>
+        <form method="post" action="/users" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name<span class="req"> *</span></label>
+                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="First Name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name<span class="req"> *</span></label>
+                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Last Name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Address<span class="req"> *</span></label>
+                <input type="text" name="address" class="form-control" id="address" placeholder="Address" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">Email<span class="req"> *</span></label>
+                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="dateofbirth" class="form-label">Date of Birth<span class="req"> *</span></label>
+                <input type="date" name="dateofbirth" class="form-control" id="dateofbirth" placeholder="Date of Birth" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Phone Number<span class="req"> *</span></label>
+                <input type="text" name="phone_number" class="form-control" id="phone_number" placeholder="Phone Number" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="role" class="form-label">Role<span class="req"> *</span></label>
+                <select class="form-select" name="role" id="role" onchange="toggleCustomRoleInput()" required>
+                    <option value="trainer">Trainer</option>
+                    <option value="member">Member</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </div>
+
+            <div id="custom-role-container" class="mb-3" style="display:none;">
+                <label for="custom-role-input" class="form-label">Custom Role</label>
+                <input type="text" class="form-control" id="custom-role-input" name="custom_role" placeholder="Enter custom role">
+            </div>
+
+            <div id="custom-description-container" class="mb-3" style="display:none;">
+                <label for="custom-description" class="form-label">Description</label>
+                <textarea class="form-control" id="custom-description" name="custom_description" placeholder="Enter role description"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="medical_history" class="form-label">Medical History</label>
+                <textarea class="form-control" id="medical_history" name="medical_history" placeholder="Enter the medical history"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="photo" class="form-label">Profile Picture</label>
+                <input type="file" class="form-control" id="photo" name="photo">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add User</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 GymGate. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

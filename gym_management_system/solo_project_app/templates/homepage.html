@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GymGate - Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background: white;
+            margin-top: 20px;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8;
+        }
+
+        .profile-button {
+            background: rgb(99, 39, 120);
+            box-shadow: none;
+            border: none;
+        }
+
+        .profile-button:hover,
+        .profile-button:focus,
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none;
+        }
+
+        .back:hover {
+            color: #682773;
+            cursor: pointer;
+        }
+
+        .labels {
+            font-size: 11px;
+        }
+
+        .add-experience:hover {
+            background: #BA68C8;
+            color: #fff;
+            cursor: pointer;
+            border: solid 1px #BA68C8;
+        }
+
+        header {
+            background-color: #4b2e83;
+            padding: 10px;
+            color: white;
+        }
+
+        header .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #4b2e83;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Section: Design Block -->
+    <section class="">
+        <!-- Jumbotron -->
+        <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+            <div class="container">
+                <div class="row gx-lg-5 align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <h1 class="my-5 display-3 fw-bold ls-tight">
+                            Gym Gate <br />
+                            <span class="text-primary">The Best Gym Management System Website</span>
+                        </h1>
+                        <p style="color: hsl(217, 10%, 50.8%)">
+                            Gym Management System is a website designed to manage the various aspects of a gym,
+                            including memberships, subscriptions, class scheduling, coach assignments, and specialty
+                            offerings. The system facilitates the organization and tracking of gym activities, ensuring
+                            efficient operations and enhancing the overall member experience.
+                        </p>
+                    </div>
+
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <div class="card">
+                            <div class="card-body py-5 px-md-5">
+                                <form action="/" method="post">
+                                    {% csrf_token %}
+                                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                                    <h1>Admin Login</h1>
+                                    <!-- Email input -->
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="text" id="form3Example3" class="form-control" name="username" />
+                                        <label class="form-label" for="form3Example3">Username</label>
+                                    </div>
+
+                                    <!-- Password input -->
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="password" id="form3Example4" class="form-control"
+                                            name="password" />
+                                        <label class="form-label" for="form3Example4">Password</label>
+                                    </div>
+
+
+
+                                    <!-- Submit button -->
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                        class="btn btn-primary btn-block mb-4">
+                                        Sign in
+                                    </button>
+
+                                    <!-- Register buttons -->
+
+                                </form>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+    </section>
+    <!-- Section: Design Block -->
+    <!-- Footer -->
+   
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 GymGate. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

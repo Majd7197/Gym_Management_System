@@ -1,0 +1,35 @@
+body{
+    padding: 40px 40px 0 40px;
+    width:100%;
+}
+.top_container{
+    width:30%;
+    display:flex;
+    justify-content: space-around;
+}
+.info{
+    font-size: 25px;
+    font-weight: 400;
+}
+.no_button{
+    background-color: #cccccc;
+    box-shadow: 3px 3px 3px black;
+    font-size: 20px;
+    font-weight: 400;
+    justify-self: center;
+    color:white;
+    }
+    .yes_button{
+        background-color: #990000;
+        box-shadow: 3px 3px 3px black;
+        font-size: 20px;
+        font-weight: 400;
+        justify-self: center;
+        color:white;
+    }
+    .centering_button{
+        margin:10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
